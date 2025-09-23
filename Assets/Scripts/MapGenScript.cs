@@ -4,7 +4,6 @@ public class MapGenScript : MonoBehaviour
 {
     public GameObject planeObject;
     public Transform planeSpawn;
-    public PlayerScript playerObject;
     public bool startingPlane = false;
     private bool hasSpawned = false;
     public GameObject[] obstaclesToSpawn;
@@ -51,11 +50,10 @@ public class MapGenScript : MonoBehaviour
     }
 
     private void Update() {
-        if (playerObject == null) {
+        if (!Player.LocalPlayer) {
             hasSpawned = false;
-            playerObject = FindAnyObjectByType<PlayerScript>();
         }
-        if (Vector3.Distance(playerObject.transform.position, this.transform.position) < 100f && !hasSpawned) {
+        if (Vector3.Distance(Player.LocalPlayer.transform.position, this.transform.position) < 100f && !hasSpawned) {
             hasSpawned = true;
             MapGenScript spawnedPlane = Instantiate(planeObject, planeSpawn.position, planeSpawn.rotation).GetComponent<MapGenScript>();
             spawnedPlane.spawnCount += increaseSpawnCount();
@@ -66,14 +64,14 @@ public class MapGenScript : MonoBehaviour
         if (collision.gameObject.GetComponent<SphereCollider>() != null) {
             if (startingPlane)
                 return;
-            if (!playerObject.alive)
+            if (!Player.LocalPlayer.alive)
                 return;
             Invoke(nameof(DestroyMe), 2.5f);
         }
     }
 
     public void DestroyMe() {
-        if (!playerObject.alive)
+        if (!Player.LocalPlayer.alive)
             return;
         Destroy(this.gameObject);
     }

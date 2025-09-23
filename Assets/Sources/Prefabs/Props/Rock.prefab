@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4013275331872712965, guid: dcb5beca846cf2240843b3de84181a4a, type: 3}
     - target: {fileID: 919132149155446097, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
       propertyPath: m_Name
       value: Rock
@@ -61,7 +69,7 @@ PrefabInstance:
       addedObject: {fileID: 5437947988909659957}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4413152256607249115}
+      addedObject: {fileID: 1461687145694884660}
   m_SourcePrefab: {fileID: 100100000, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
 --- !u!1 &7249234596345021912 stripped
 GameObject:
@@ -90,7 +98,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4013275331872712965, guid: 8f0ffb85c3c161f4fa17c4206f115b1a, type: 3}
---- !u!114 &4413152256607249115
+--- !u!114 &1461687145694884660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,6 +107,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7249234596345021912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32cd5bd1404e0e8469fe12b5ca9ac947, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f64b87cb64334243aa0225f3868316a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

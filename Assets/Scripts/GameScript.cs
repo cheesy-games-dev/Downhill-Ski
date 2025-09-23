@@ -9,27 +9,25 @@ public class GameScript : MonoBehaviour
     public Canvas canvas;
     public Toggle musicToggle;
     public TMP_Text highScoreText;
-    public PlayerScript playerScript;
 
-    private void Awake() {
+    private void Start() {
         DontDestroyOnLoad(this.gameObject);
         canvas = GetComponent<Canvas>();
         MusicPlayer = GetComponent<AudioSource>();
-        playerScript = FindAnyObjectByType<PlayerScript>();
-        playerScript.rb.isKinematic = true;
+        Player.LocalPlayer.rb.isKinematic = true;
     }
 
     private Camera GetPlayerCamera() {
-        if (playerScript.fpsCamera.enabled) {
-            return playerScript.fpsCamera;
+        if (Player.LocalPlayer.fpsCamera.enabled) {
+            return Player.LocalPlayer.fpsCamera;
         }
         else {
-            return playerScript.myCamera;
+            return Player.LocalPlayer.myCamera;
         }
     }
 
     private void Update() {
-        playerScript = FindAnyObjectByType<PlayerScript>();
+        Player.LocalPlayer = FindAnyObjectByType<Player>();
         canvas.worldCamera = GetPlayerCamera();
         highScoreText.text = "High Score:\n" + PlayerPrefs.GetInt("HighScore");
         MusicPlayer.enabled = musicToggle.isOn;
@@ -41,10 +39,10 @@ public class GameScript : MonoBehaviour
     }
 
     public void StartGame() {
-        playerScript.StartGame();
+        Player.LocalPlayer.StartGame();
     }
 
     public void ChangePlayerCamera() {
-        playerScript.ChangeCamera();
+        Player.LocalPlayer.ChangeCamera();
     }
 }

@@ -3,10 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class PlayerScript : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    public static Player LocalPlayer;
     public Animator animator;
     public Camera myCamera;
     public TMP_Text scoreText;
@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     public bool alive = true;
 
     private void Awake() {
+        LocalPlayer = this;
         Time.timeScale = 1f;
         score = 0;
         tempPlayerSpeed = playerSpeed;
