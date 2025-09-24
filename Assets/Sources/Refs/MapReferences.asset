@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ae6ab032c4d904abd1501473679a7c, type: 3}
   m_Name: MapReferences
   m_EditorClassIdentifier: 
+  HillScene:
+    m_AssetGUID: 99c9720ab356a0642a771bea13969a05
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   spawnables: {fileID: 11400000, guid: d4b3ae5a1db01fc42a3b65847f9d6896, type: 2}
+  PlayerPrefab:
+    m_AssetGUID: 31d1ef9da3fb6cf46af8663c00325289
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0

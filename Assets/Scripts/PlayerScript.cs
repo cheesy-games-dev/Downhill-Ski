@@ -1,125 +1,64 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public static Player LocalPlayer;
-    public Animator animator;
-    public Camera myCamera;
-    public TMP_Text scoreText;
-    public Transform cameraPlace;
-    public float lerpTime;
-    public Rigidbody rb;
-    public float playerSpeed;
-    public float turnSpeed;
-    public LayerMask groundLayerMask;
-    public float score = 0;
-    public Camera fpsCamera;
-    public Transform headPos;
+    public static Player LocalPlayer { get; private set; }
+    public static Action<Player> OnPlayerSpawned;
+    public Rigidbody Rigidbody;
+    public Rigidbody FootBall;
+    public PlayerStats Stats;
 
-    public Rigidbody[] rigidbodiesEnableOnDeath;
+    public bool Live = true;
 
-    private string tempBool = "null";
-    [NonSerialized] public float tempPlayerSpeed;
-    [NonSerialized] public float maxVel = 50f;
-
-    public bool alive = true;
-
-    private void Awake() {
-        rb.isKinematic = true;
+    private void Awake()
+    {
+        FootBall.isKinematic = true;
         LocalPlayer = this;
-        Time.timeScale = 1f;
-        score = 0;
-        tempPlayerSpeed = playerSpeed;
-        myCamera = GetComponentInChildren<Camera>();
-        rb = GetComponentInChildren<Rigidbody>();
-        alive = true;
-        rigidbodiesEnableOnDeath = GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rigidbody in rigidbodiesEnableOnDeath) {
-            if (!rigidbody.Equals(rb)) {
-                rigidbody.useGravity = false;
-                rigidbody.isKinematic = true;
-                rigidbody.GetComponent<Collider>().enabled = false;
-            }       
-        }      
-        if (tempBool == "bean") {
-            myCamera.enabled = false;
-            return;
-        }
-        myCamera.enabled = true;
-        //myCamera.transform.parent = null;
-        rb.transform.parent = null;
-        fpsCamera.transform.position = headPos.position;
-        fpsCamera.transform.rotation = headPos.rotation;
+        OnPlayerSpawned?.Invoke(this);
     }
 
-    private Vector2 moveInput;
-
-    public void OnMove(InputAction.CallbackContext callbackContext) {
-        moveInput = callbackContext.ReadValue<Vector2>();
-    }
-    private bool fpsPlayerMode = false;
-    private void Update()
-    {   
-        if (tempBool == "bean") {
-            myCamera.enabled = false;
-            return;
-        }
-        if (Keyboard.current.fKey.wasPressedThisFrame) {
-            fpsPlayerMode = !fpsPlayerMode;
-        }
-        fpsCamera.enabled = fpsPlayerMode;
-        myCamera.enabled = !fpsPlayerMode;
-        if (!alive)
-            return;  
-        fpsCamera.transform.parent = headPos;
-        myCamera.transform.position = Vector3.Slerp(myCamera.transform.position, cameraPlace.position, lerpTime * Time.deltaTime);
-        myCamera.transform.eulerAngles = Vector3.Slerp(myCamera.transform.eulerAngles, cameraPlace.eulerAngles, lerpTime * Time.deltaTime);
-        transform.position = rb.transform.position;
-        rb.AddForce(transform.forward * playerSpeed);
-        rb.AddForce(Vector3.right * moveInput.x * turnSpeed * 10f);
-        animator.SetFloat("xPos", Mathf.Lerp(animator.GetFloat("xPos"), moveInput.x, 5 * Time.deltaTime));
-        rb.freezeRotation = true;
-        rb.maxLinearVelocity = maxVel;
-        RaycastHit hit;
-        if (Physics.Raycast(rb.position, -rb.transform.up, out hit, 0.5f, groundLayerMask)) {
-            cameraPlace.localPosition = new Vector3(0, 3, -4f);
-            cameraPlace.localEulerAngles = new Vector3(0, 0, 0);
-            transform.rotation = Quaternion.FromToRotation(rb.transform.up, hit.normal); // * rb.rotation;
-            playerSpeed = 1f;
-            score += Time.deltaTime;
-        }
-        else {
-            cameraPlace.localPosition = new Vector3(0, 2.5f, -2.78f);
-            cameraPlace.localEulerAngles = new Vector3(15f, 0, 0);
-            playerSpeed = tempPlayerSpeed;
-        }
-        scoreText.text = "Score\n" + Mathf.RoundToInt(score).ToString();
+    public static void StartLocalPlayer()
+    {
+        LocalPlayer.StartPlayer();
     }
 
-    public void ChangeCamera() {
-        fpsPlayerMode = !fpsPlayerMode;
+    protected void StartPlayer()
+    {
+        FootBall.isKinematic = false;
+        FootBall.AddForce(Vector3.forward * 300);
+    }
+
+    private void FixedUpdate()
+    {
+        FootBall.AddTorque(Stats.ConstantForce);
+    }
+    public void Joystick(float horizontal)
+    {
+        horizontal = Mathf.Clamp(horizontal, -1, 1);
+        horizontal *= 20;
+        Stats.ConstantForce.z = horizontal;
+    }
+    public void Jump()
+    {
+        if(Physics.Raycast(FootBall.position, Vector3.down, 1)) FootBall.AddForce(Stats.JumpForce);
+    }
+
+    public void ChangeCamera()
+    {
     }
 
     public void Die() {
-        alive = false;
-        animator.enabled = false;
-        foreach (Rigidbody rigidbody in rigidbodiesEnableOnDeath) {
-            if (!rigidbody.Equals(rb)) {
-                rigidbody.useGravity = true;
-                rigidbody.isKinematic = false;
-                rigidbody.GetComponent<Collider>().material = new PhysicsMaterial(gameObject.name);
-                rigidbody.GetComponent<Collider>().material.frictionCombine = PhysicsMaterialCombine.Minimum;
-                rigidbody.GetComponent<Collider>().material.staticFriction = 0.1f;
-                rigidbody.GetComponent<Collider>().material.dynamicFriction = 0.1f;
-                rigidbody.GetComponent<Collider>().enabled = true;
-                rigidbody.AddForce(Vector3.up + Vector3.forward * 5);
-            }
-        }
+        Live = false;
+        FootBall.AddExplosionForce(6, transform.position, 0.5f);
         Time.timeScale = 1f;
+        GameManager.Instance.Invoke(nameof(GameManager.Instance.RestartScene), 3);
         Debug.Log("Dead");
     }
+}
+
+[System.Serializable]
+public struct PlayerStats {
+    public Vector3 ConstantForce;
+    public Vector3 JumpForce;
 }

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -6,23 +8,29 @@ public class ObstacleSpawner : MonoBehaviour
 {
     public bool SpawnOnStart = true;
     public AssetReferenceGameObject Obstacle;
-    public AsyncOperationHandle<GameObject> SpawnedObstacle;
+    public AsyncOperationHandle<GameObject> SpawnedObstacle = new();
     void Start()
     {
-        SpawnedObstacle = Addressables.InstantiateAsync(Obstacle);
+        if (!SpawnOnStart) return;
+        SpawnSpawnable();
+    }
+
+    public async void SpawnSpawnable()
+    {
+        SpawnedObstacle = new();
+        SpawnedObstacle = Addressables.InstantiateAsync(Obstacle, transform.position, transform.rotation, null, true);
+        await SpawnedObstacle.Task;
     }
 
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.green;
         if (!Obstacle.editorAsset) return;
-        var renderers = Obstacle.editorAsset.GetComponents<Renderer>();
-
-        foreach (var renderer in renderers)
+        var filters = Obstacle.editorAsset.GetComponentsInChildren<MeshFilter>();
+        foreach (var filter in filters)
         {
-            var center = renderer.bounds.center;
-            var size = renderer.bounds.size;
-            Gizmos.DrawCube(center, size);
+            Gizmos.DrawWireMesh(filter.sharedMesh, transform.position, Quaternion.Euler(transform.eulerAngles + filter.transform.eulerAngles), filter.transform.localScale);
         }
     }
 #endif

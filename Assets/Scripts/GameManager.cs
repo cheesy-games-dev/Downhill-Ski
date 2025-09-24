@@ -2,10 +2,14 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    #region static
+    public static Action OnStart;
+    #endregion
     #region vars
     private const string HighScoreKey = "HighScore";
     public int HighScore
@@ -20,6 +24,7 @@ public class GameManager : MonoBehaviour
         }
     }
     public int Score;
+    public MapReferences MapReferences;
     public static GameManager Instance { get; private set; }
     #endregion
 
@@ -27,10 +32,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        MapReferences.Current = MapReferences;
         DontDestroyOnLoad(this.gameObject);
-        Player.LocalPlayer.rb.isKinematic = true;
+        OnStart?.Invoke();
     }
-
     void Update()
     {
 
@@ -38,30 +43,18 @@ public class GameManager : MonoBehaviour
 
     #endregion
     #region  logic
-    public Camera GetPlayerCamera()
-    {
-        if (Player.LocalPlayer.fpsCamera.enabled)
-        {
-            return Player.LocalPlayer.fpsCamera;
-        }
-        else
-        {
-            return Player.LocalPlayer.myCamera;
-        }
-    }
     public GameState State = GameState.Empty;
     public enum GameState : int
     {
-        Empty = -1,
+        Empty = 0,
         Started,
         Dead,
     }
     public void StartGame()
     {
-        if (State == 0) return;
+        if (State != GameState.Empty) return;
         State = GameState.Started;
-        Player.LocalPlayer.rb.isKinematic = false;
-        Player.LocalPlayer.rb.AddForce(Vector3.forward * 100);
+        Player.StartLocalPlayer();
     }
 
     public void RestartScene()

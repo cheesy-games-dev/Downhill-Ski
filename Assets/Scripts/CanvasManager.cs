@@ -8,11 +8,12 @@ public class CanvasManager : MonoBehaviour
     public Button ChangeCameraButton;
     public Toggle MusicToggle;
 
-    IEnumerator Start()
+    void Start()
     {
-        yield return new WaitForSeconds(0.5f);
-        StartButton.onClick.AddListener(GameManager.Instance.StartGame);
-        ChangeCameraButton.onClick.AddListener(GameManager.Instance.ChangePlayerCamera);
+        StartButton.onClick.AddListener(StartGame);
+        ChangeCameraButton.onClick.AddListener(ChangePlayerCamera);
         //MusicToggle.onValueChanged.AddListener(GameManager.Instance.);
     }
+    public void StartGame() => GameManager.Instance.StartGame();
+    public void ChangePlayerCamera() => GameManager.Instance.ChangePlayerCamera();
 }

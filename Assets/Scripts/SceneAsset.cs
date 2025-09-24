@@ -1,10 +1,15 @@
-namespace UnityEngine.AddressableAssets
+using UnityEngine.AddressableAssets;
+
+[System.Serializable]
+public class SceneAsset : AssetReference
 {
-    public class SceneAsset : AssetReference
+
+    public SceneAsset(string guid) : base(guid) { }
+
+    //-----------------------------------------------------------------------------
+
+    public override bool ValidateAsset(string path)
     {
-        public override bool ValidateAsset(string path)
-        {
-            return path.ToLower().Contains(".unity");
-        }
+        return path.EndsWith(".unity");
     }
 }
