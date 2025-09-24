@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public bool alive = true;
 
     private void Awake() {
+        rb.isKinematic = true;
         LocalPlayer = this;
         Time.timeScale = 1f;
         score = 0;
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
             if (!rigidbody.Equals(rb)) {
                 rigidbody.useGravity = true;
                 rigidbody.isKinematic = false;
-                rigidbody.GetComponent<Collider>().material = new PhysicsMaterial("tempOrSomething");
+                rigidbody.GetComponent<Collider>().material = new PhysicsMaterial(gameObject.name);
                 rigidbody.GetComponent<Collider>().material.frictionCombine = PhysicsMaterialCombine.Minimum;
                 rigidbody.GetComponent<Collider>().material.staticFriction = 0.1f;
                 rigidbody.GetComponent<Collider>().material.dynamicFriction = 0.1f;
@@ -118,20 +119,7 @@ public class Player : MonoBehaviour
                 rigidbody.AddForce(Vector3.up + Vector3.forward * 5);
             }
         }
-        Invoke(nameof(RestartScene), 3f);
         Time.timeScale = 1f;
         Debug.Log("Dead");
-    }
-
-    private void RestartScene() {
-        if (score >= PlayerPrefs.GetInt("HighScore") || !PlayerPrefs.HasKey("HighScore")) {
-            PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(score));
-        }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void StartGame() {
-        this.rb.isKinematic = false;
-        rb.AddForce(Vector3.forward * 100);
     }
 }

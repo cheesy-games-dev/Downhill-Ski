@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Poolee : MonoBehaviour
 {
@@ -24,7 +25,14 @@ public class Poolee : MonoBehaviour
         switch (type)
         {
             case 0:
-                Destroy(gameObject);
+                try
+                {
+                    Addressables.ReleaseInstance(gameObject);
+                }
+                catch
+                {
+                    Destroy(gameObject);
+                }
                 break;
             case DespawnType.Disable:
                 gameObject.SetActive(false);
