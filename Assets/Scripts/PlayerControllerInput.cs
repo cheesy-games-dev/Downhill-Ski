@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerInputControl : MonoBehaviour
+public class PlayerControllerInput: PlayerController
 {
-    void Update()
+    public override void InputUpdate()
     {
-        if(Input.touchCount > 0) Player.LocalPlayer?.Joystick(Input.GetTouch(0).position.x);
+        if (Input.touchCount > 0) Player.LocalPlayer?.Joystick(Input.GetTouch(0).position.x);
         else Player.LocalPlayer?.Joystick(Input.GetAxis("Horizontal"));
         if (Input.GetButton("Jump"))
         {

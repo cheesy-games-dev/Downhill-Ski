@@ -7,6 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class ObstacleSpawner : MonoBehaviour
 {
     public bool SpawnOnStart = true;
+    public bool ParentToSpawner = false;
     public AssetReferenceGameObject Obstacle;
     public AsyncOperationHandle<GameObject> SpawnedObstacle = new();
     void Start()
@@ -18,7 +19,7 @@ public class ObstacleSpawner : MonoBehaviour
     public async void SpawnSpawnable()
     {
         SpawnedObstacle = new();
-        SpawnedObstacle = Addressables.InstantiateAsync(Obstacle, transform.position, transform.rotation, null, true);
+        SpawnedObstacle = Addressables.InstantiateAsync(Obstacle, transform.position, transform.rotation, ParentToSpawner ? transform : null, true);
         await SpawnedObstacle.Task;
     }
 

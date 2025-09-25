@@ -9,10 +9,11 @@ public class LoadingScene : MonoBehaviour
 {
     public TMP_Text loadtext;
     public SceneAsset DefaultScene;
+    public AssetLabelReference Label;
     private static string info;
     private void Start()
     {
-        var handle = Addressables.LoadAssetsAsync<Object>("", UpdateLoad);
+        var handle = Addressables.LoadAssetsAsync<Object>(Label, UpdateLoad);
         handle.Completed += FinishedLoading;
     }
 

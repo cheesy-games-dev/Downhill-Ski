@@ -18,32 +18,38 @@ MonoBehaviour:
   - m_GUID: 1283be426bb6cc449818bd37d72ca74f
     m_Address: Materials
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27e5da15ad26f2e47a5abc6ae6255c3d
     m_Address: Models
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3f230c1b681c8604f82e959a39f889c5
     m_Address: Audio
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9c53962885c2c4f449125a979d6ad240
     m_Address: Scenes
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c632ade3d44ce1f4d8d85e22eaad2b0c
     m_Address: Prefabs
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe344c16411c38d4395e8a289ba026c0
     m_Address: Animators
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6294554753de5344396bc71ed80c3838, type: 2}

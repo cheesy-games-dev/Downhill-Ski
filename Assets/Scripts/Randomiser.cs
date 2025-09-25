@@ -40,29 +40,9 @@ public class Randomiser : MonoBehaviour
 
     private int RNG()
     {
-        int i = Random.Range(0, 5);
+        int i = Random.Range(0, 3);
         int x = 6;
-        switch (i)
-        {
-            case 0:
-                x = Random.Range(2, 6);
-                break;
-            case 1:
-                x = Random.Range(7, 15);
-                break;
-            case 2:
-                x = Random.Range(16, 20);
-                break;
-            case 3:
-                x = Random.Range(21, 26);
-                break;
-            case 4:
-                x = Random.Range(27, 38);
-                break;
-            case 5:
-                x = Random.Range(39, 50);
-                break;
-        }
+        x = Random.Range(2*i, 6*i);
         return x;
     }
 

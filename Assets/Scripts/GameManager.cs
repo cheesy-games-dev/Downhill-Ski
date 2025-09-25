@@ -47,18 +47,19 @@ public class GameManager : MonoBehaviour
     public enum GameState : int
     {
         Empty = 0,
-        Started,
-        Dead,
+        Running,
+        Ending,
     }
     public void StartGame()
     {
-        if (State != GameState.Empty) return;
-        State = GameState.Started;
+        if (State == GameState.Running) return;
+        State = GameState.Running;
         Player.StartLocalPlayer();
     }
 
-    public void RestartScene()
+    public void EndGame()
     {
+        State = GameState.Ending;
         if (Score >= HighScore || !PlayerPrefs.HasKey(HighScoreKey))
         {
             HighScore = Mathf.RoundToInt(Score);

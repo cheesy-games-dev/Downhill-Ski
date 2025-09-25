@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Rigidbody Rigidbody;
     public Rigidbody FootBall;
     public PlayerStats Stats;
-
+    public PlayerController Controller;
     public bool Live = true;
 
     private void Awake()
@@ -17,27 +17,34 @@ public class Player : MonoBehaviour
         LocalPlayer = this;
         OnPlayerSpawned?.Invoke(this);
     }
+    public void SetController(PlayerController controller)
+    {
+        Controller = controller;
+    }
 
     public static void StartLocalPlayer()
     {
-        LocalPlayer.StartPlayer();
+        LocalPlayer?.OnStartPlayer();
     }
 
-    protected void StartPlayer()
+    public void OnStartPlayer()
     {
         FootBall.isKinematic = false;
-        FootBall.AddForce(Vector3.forward * 300);
+        FootBall?.AddForce(Vector3.forward * 300);
+        if (!TryGetComponent(out Controller)) SetController(gameObject.AddComponent<PlayerControllerInput>());
     }
 
     private void FixedUpdate()
     {
-        FootBall.AddTorque(Stats.ConstantForce);
+        Controller?.InputUpdate();
+        FootBall?.AddForce(Stats.ConstantForce);
     }
     public void Joystick(float horizontal)
     {
         horizontal = Mathf.Clamp(horizontal, -1, 1);
-        horizontal *= 20;
-        Stats.ConstantForce.z = horizontal;
+        float speed = horizontal * Stats.SpeedMultiplier;
+        Stats.ConstantForce.x = speed;
+        //FootBall.AddForce(Vector3.right*speed);
     }
     public void Jump()
     {
@@ -50,15 +57,20 @@ public class Player : MonoBehaviour
 
     public void Die() {
         Live = false;
-        FootBall.AddExplosionForce(6, transform.position, 0.5f);
+        FootBall?.AddExplosionForce(6, transform.position, 0.5f);
         Time.timeScale = 1f;
-        GameManager.Instance.Invoke(nameof(GameManager.Instance.RestartScene), 3);
+        Rigidbody.freezeRotation = false;
+        Rigidbody?.AddTorque(Vector3.one * 6);
+        Destroy(FootBall?.GetComponent<Joint>());
+        GameManager.Instance?.Invoke(nameof(GameManager.Instance.EndGame), 3);
         Debug.Log("Dead");
     }
 }
 
-[System.Serializable]
-public struct PlayerStats {
+[Serializable]
+public struct PlayerStats
+{
     public Vector3 ConstantForce;
     public Vector3 JumpForce;
+    public float SpeedMultiplier;
 }
