@@ -14,7 +14,7 @@ public class Randomiser : MonoBehaviour
     private void Start()
     {
         if (!GameManager.Instance) return;
-        var spawnables = GameManager.Instance.MapReferences.spawnables.Spawnables;
+        var spawnables = GameManager.Instance.Data.MapReferences.spawnables.Spawnables;
         spawner.Obstacle = spawnables[Random.Range(0+Random.Range(0, (spawnables.Length - 1)/2), spawnables.Length - 1)];
         for (int i = 0; i < RNG(); i++)
         {

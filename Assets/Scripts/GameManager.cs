@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -7,10 +8,44 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    #region static
     public static Action OnStart;
+    public static GameManagerData GetData()
+    {
+        return Instance ? Instance.Data : new();
+    }
+    public GameManagerData Data = new();
+    public static GameManager Instance { get; private set; }
+
+    #region life
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        Instance = this;
+        OnStart?.Invoke();
+    }
+    void Update()
+    {
+        Data.OnUpdate();
+    }
+
     #endregion
-    #region vars
+    #region  logic
+
+    public void StartGame() => Data.StartGame();
+
+    public void EndGame() => Data.EndGame();
+
+    public void ChangePlayerCamera()
+    {
+        Player.LocalPlayer.ChangeCamera();
+    }
+    #endregion
+}
+
+
+[Serializable, JsonObject]
+public class GameManagerData
+{
     private const string HighScoreKey = "HighScore";
     public int HighScore
     {
@@ -23,26 +58,17 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(HighScoreKey, value);
         }
     }
-    public int Score;
+    internal float score = 0;
+    public int Score
+    {
+        get
+        {
+            return Mathf.RoundToInt(score);
+        }
+    }
+    [JsonIgnore]
     public MapReferences MapReferences;
-    public static GameManager Instance { get; private set; }
-    #endregion
 
-    #region life
-    private void Start()
-    {
-        Instance = this;
-        MapReferences.Current = MapReferences;
-        DontDestroyOnLoad(this.gameObject);
-        OnStart?.Invoke();
-    }
-    void Update()
-    {
-
-    }
-
-    #endregion
-    #region  logic
     public GameState State = GameState.Empty;
     public enum GameState : int
     {
@@ -50,26 +76,40 @@ public class GameManager : MonoBehaviour
         Running,
         Ending,
     }
-    public void StartGame()
+
+    public GameManagerData()
+    {
+        score = 0;
+        State = GameState.Empty;
+    }
+
+    internal void VerifyHighScore()
+    {
+        if (Score >= HighScore || !PlayerPrefs.HasKey(HighScoreKey))
+        {
+            HighScore = Score;
+        }
+    }
+
+    internal void OnUpdate()
+    {
+        if (State == GameState.Running)
+        {
+            score += Time.deltaTime * 1;
+        }
+    }
+
+    internal void EndGame()
+    {
+        State = GameState.Ending;
+        VerifyHighScore();
+        Addressables.LoadSceneAsync(MapReferences.HillScene);
+    }
+
+    internal void StartGame()
     {
         if (State == GameState.Running) return;
         State = GameState.Running;
         Player.StartLocalPlayer();
     }
-
-    public void EndGame()
-    {
-        State = GameState.Ending;
-        if (Score >= HighScore || !PlayerPrefs.HasKey(HighScoreKey))
-        {
-            HighScore = Mathf.RoundToInt(Score);
-        }
-        Addressables.LoadSceneAsync(MapReferences.Current.HillScene);
-    }
-
-    public void ChangePlayerCamera()
-    {
-        Player.LocalPlayer.ChangeCamera();
-    }
-    #endregion
 }

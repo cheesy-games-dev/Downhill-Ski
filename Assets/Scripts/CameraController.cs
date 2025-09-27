@@ -3,16 +3,34 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Player Player;
-    private Quaternion rotation;
-    public float t = 3;
-    public float maxRotation = 20;
+    public CameraTarget origin;
+    public CameraTarget left;
+    public CameraTarget right;
+    public float t = 1;
     void Start()
     {
         Player = GetComponentInParent<Player>();
     }
-    void FixedUpdate()
+    void LateUpdate()
     {
-        rotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(new(0,Mathf.Clamp(Player.Stats.ConstantForce.x * t, -maxRotation, maxRotation))), t * Time.deltaTime);
-        transform.localRotation = rotation;
+        float x = Player.Stats.ConstantForce.x;
+        bool isOrigin = x < right.threshold && x > left.threshold;
+        bool isRight = x >= right.threshold;
+        CameraTarget selectedTarget = isOrigin ? origin : (isRight ? right : left);// x >= right.threshold ? right : left;
+        if (selectedTarget.transform == null) return;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, selectedTarget.transform.localPosition, t * Time.fixedDeltaTime);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, selectedTarget.transform.localRotation, t * Time.fixedDeltaTime);
+    }
+}
+
+[System.Serializable]
+public struct CameraTarget
+{
+    public Transform transform;
+    public float threshold;
+    public CameraTarget(Transform transform = null, float threshold = 0)
+    {
+        this.transform = transform;
+        this.threshold = threshold;
     }
 }
