@@ -10,9 +10,13 @@ public class PlayerControllerInput: PlayerController
         {
             Player.LocalPlayer?.Jump();
         }
-        if (Input.GetButton("Camera"))
+        if (Input.GetButton("Music"))
         {
-            Player.LocalPlayer?.ChangeCamera();
+            MusicPlayer.Instance?.ChangeSongs();
+        }
+        if (Input.GetButton("Mute"))
+        {
+            MusicPlayer.Instance?.TogglePause(!MusicPlayer.Instance.AudioSource.isPlaying);
         }
     }
 }

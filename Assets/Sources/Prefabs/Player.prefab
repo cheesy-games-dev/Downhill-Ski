@@ -468,46 +468,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IP: Player
---- !u!1 &2025898073024426096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6756463727657455222}
-  - component: {fileID: 7351879765877395561}
-  m_Layer: 0
-  m_Name: AudioListener
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6756463727657455222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025898073024426096}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5401042822048380452}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &7351879765877395561
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025898073024426096}
-  m_Enabled: 1
 --- !u!1 &2559694336851807088
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +591,6 @@ Transform:
   m_Children:
   - {fileID: 1490531049360541613}
   - {fileID: 1007058682446795733}
-  - {fileID: 6756463727657455222}
   - {fileID: 8312889940922909749}
   - {fileID: 1429769926473629578}
   - {fileID: 6791344620537757686}
@@ -719,7 +678,7 @@ MonoBehaviour:
   FootBall: {fileID: 288351223172754191}
   Stats:
     ConstantForce: {x: 0, y: 0, z: 4}
-    JumpForce: {x: 0, y: 30, z: 0}
+    JumpForce: {x: 0, y: 100, z: 0}
     SpeedMultiplier: 30
   Controller: {fileID: 5827220447599183054}
   Live: 1
@@ -745,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007058682446795733}
   - component: {fileID: 5580393883506541058}
+  - component: {fileID: 6875307555643303226}
   m_Layer: 0
   m_Name: Cam
   m_TagString: Untagged
@@ -790,6 +750,14 @@ MonoBehaviour:
     transform: {fileID: 6791344620537757686}
     threshold: 0.1
   t: 10
+--- !u!81 &6875307555643303226
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635363177411801775}
+  m_Enabled: 1
 --- !u!1 &6472934615399068383
 GameObject:
   m_ObjectHideFlags: 0

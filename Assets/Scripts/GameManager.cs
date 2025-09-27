@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     {
         return Instance ? Instance.Data : new();
     }
+    public static void AddScore()
+    {
+        Instance?.Data?.AddScore();
+    }
     public GameManagerData Data = new();
     public static GameManager Instance { get; private set; }
 
@@ -35,11 +39,12 @@ public class GameManager : MonoBehaviour
 
     public void EndGame() => Data.EndGame();
 
-    public void ChangePlayerCamera()
-    {
-        Player.LocalPlayer.ChangeCamera();
-    }
     #endregion
+
+    public static void PauseGame()
+    {
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+    }
 }
 
 
@@ -58,14 +63,8 @@ public class GameManagerData
             PlayerPrefs.SetInt(HighScoreKey, value);
         }
     }
-    internal float score = 0;
-    public int Score
-    {
-        get
-        {
-            return Mathf.RoundToInt(score);
-        }
-    }
+    public int Score { get; internal set; } = 0;
+
     [JsonIgnore]
     public MapReferences MapReferences;
 
@@ -79,24 +78,24 @@ public class GameManagerData
 
     public GameManagerData()
     {
-        score = 0;
+        Score = 0;
         State = GameState.Empty;
     }
 
     internal void VerifyHighScore()
     {
-        if (Score >= HighScore || !PlayerPrefs.HasKey(HighScoreKey))
-        {
-            HighScore = Score;
-        }
+        HighScore = Score >= HighScore?Score: HighScore;
+    }
+
+    public void AddScore()
+    {
+        if(State != GameState.Running) return;
+        Score++;
     }
 
     internal void OnUpdate()
     {
-        if (State == GameState.Running)
-        {
-            score += Time.deltaTime * 1;
-        }
+        VerifyHighScore();
     }
 
     internal void EndGame()
@@ -109,6 +108,7 @@ public class GameManagerData
     internal void StartGame()
     {
         if (State == GameState.Running) return;
+        Score = 0;
         State = GameState.Running;
         Player.StartLocalPlayer();
     }

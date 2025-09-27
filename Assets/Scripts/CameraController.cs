@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
         bool isRight = x >= right.threshold;
         CameraTarget selectedTarget = isOrigin ? origin : (isRight ? right : left);// x >= right.threshold ? right : left;
         if (selectedTarget.transform == null) return;
-        transform.localPosition = Vector3.Lerp(transform.localPosition, selectedTarget.transform.localPosition, t * Time.fixedDeltaTime);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, selectedTarget.transform.localRotation, t * Time.fixedDeltaTime);
+        transform.localPosition = Vector3.Slerp(transform.localPosition, selectedTarget.transform.localPosition, t * Time.fixedDeltaTime);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, selectedTarget.transform.localRotation, t * Time.fixedDeltaTime);
     }
 }
 

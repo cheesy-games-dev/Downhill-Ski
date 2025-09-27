@@ -20,15 +20,17 @@ public class PlayerMarker : MonoBehaviour
         await PlayerSpawningHandle.Task;
     }
 #if UNITY_EDITOR
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        if (!GameManager.Instance.Data.MapReferences.PlayerPrefab.editorAsset) return;
-        var filters = GameManager.Instance.Data.MapReferences.PlayerPrefab.editorAsset.GetComponentsInChildren<MeshFilter>();
-        foreach (var filter in filters)
+    /*
+        void OnDrawGizmos()
         {
-            Gizmos.DrawWireMesh(filter.sharedMesh, transform.position, transform.rotation);
+            Gizmos.color = Color.green;
+            if (!GameManager.GetData().MapReferences.PlayerPrefab.editorAsset) return;
+            var filters = GameManager.Instance.Data.MapReferences.PlayerPrefab.editorAsset.GetComponentsInChildren<MeshFilter>();
+            foreach (var filter in filters)
+            {
+                Gizmos.DrawWireMesh(filter.sharedMesh, transform.position, transform.rotation);
+            }
         }
-    }
+        */
 #endif
 }

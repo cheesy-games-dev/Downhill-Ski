@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Threading.Tasks;
+using UltEvents;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,6 +11,7 @@ public class ObstacleSpawner : MonoBehaviour
     public bool ParentToSpawner = false;
     public AssetReferenceGameObject Obstacle;
     public AsyncOperationHandle<GameObject> SpawnedObstacle = new();
+    public UltEvent<ObstacleSpawner, GameObject> OnSpawned = new();
     void Start()
     {
         if (!SpawnOnStart) return;
@@ -21,6 +23,7 @@ public class ObstacleSpawner : MonoBehaviour
         SpawnedObstacle = new();
         SpawnedObstacle = Addressables.InstantiateAsync(Obstacle, transform.position, transform.rotation, ParentToSpawner ? transform : null, true);
         await SpawnedObstacle.Task;
+        OnSpawned.Invoke(this, SpawnedObstacle.Result);
     }
 
 #if UNITY_EDITOR

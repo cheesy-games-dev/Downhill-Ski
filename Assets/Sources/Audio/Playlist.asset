@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-9028935550043267579
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 13_SingingBirds_{-9028935550043267579}
+  m_AudioClip: {fileID: 8300000, guid: f193c7a06c89862469c9c3867fb70736, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8247352043163782375
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Brain Dance_{-8247352043163782375}
+  m_AudioClip: {fileID: 8300000, guid: 7ae25584e338b744697ef0d69ec2ed3c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8206816125605553063
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 11_Katamari_{-8206816125605553063}
+  m_AudioClip: {fileID: 8300000, guid: 0de4aa3738a62564f976975b40c0cb6c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8015694570302748984
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 01_Speedway_{-8015694570302748984}
+  m_AudioClip: {fileID: 8300000, guid: 761d3c5c433488b4487671c9cb347b58, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7423042623443770596
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 06_GtgFast_{-7423042623443770596}
+  m_AudioClip: {fileID: 8300000, guid: cc6121c035b9eee468f446322d3e1045, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6409028743154505600
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 03_CityEscapin_{-6409028743154505600}
+  m_AudioClip: {fileID: 8300000, guid: b2124a2aa0dab7c42a5eb6c7041a4b69, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5028942476083371958
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 04_StraightAhead_{-5028942476083371958}
+  m_AudioClip: {fileID: 8300000, guid: 22ffd7dd8ea75424d8a4eee0d75e33d9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4893275168566509298
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 05_FeelTheSunshine_{-4893275168566509298}
+  m_AudioClip: {fileID: 8300000, guid: 0a56375faa991474e9f63114f4d5a455, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4596684498149661732
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 14_SpaceCity_{-4596684498149661732}
+  m_AudioClip: {fileID: 8300000, guid: 22ad3c694d29f454f9a87faaee5343be, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3031623142823040125
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 09_TootToot_{-3031623142823040125}
+  m_AudioClip: {fileID: 8300000, guid: 95f02e7ff2bcdb84db868eb72ece679e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2369390915775182132
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 08_RollingStart_{-2369390915775182132}
+  m_AudioClip: {fileID: 8300000, guid: f17a0159331d4114c969f9d61dfe4ed4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1415920945956380526
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 12_Guile_{-1415920945956380526}
+  m_AudioClip: {fileID: 8300000, guid: 306f24a93e56d9a47aef4228b99b37a4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-933226083284038782
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 07_SanicBoom_{-933226083284038782}
+  m_AudioClip: {fileID: 8300000, guid: 31a300096acb7034ca2980c4e2a43eb6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-332752596025681236
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 10_Pronto_{-332752596025681236}
+  m_AudioClip: {fileID: 8300000, guid: 38bef249e10b38d4481d7abac0ea3456, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2856298501658207615
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 15_DejaVu_{2856298501658207615}
+  m_AudioClip: {fileID: 8300000, guid: cd9828542d477884ba3f5c54865651cb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4202500002050019043
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 02_Pigcart_{4202500002050019043}
+  m_AudioClip: {fileID: 8300000, guid: 52a53869eafb92e47bf2e5c944ac4438, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Playlist
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -8015694570302748984}
+  - {fileID: 4202500002050019043}
+  - {fileID: -6409028743154505600}
+  - {fileID: -5028942476083371958}
+  - {fileID: -4893275168566509298}
+  - {fileID: -7423042623443770596}
+  - {fileID: -933226083284038782}
+  - {fileID: -2369390915775182132}
+  - {fileID: -3031623142823040125}
+  - {fileID: -332752596025681236}
+  - {fileID: -8206816125605553063}
+  - {fileID: -1415920945956380526}
+  - {fileID: -9028935550043267579}
+  - {fileID: -4596684498149661732}
+  - {fileID: 2856298501658207615}
+  - {fileID: -8247352043163782375}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 1
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
